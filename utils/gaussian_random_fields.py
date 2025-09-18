@@ -92,16 +92,3 @@ def gaussian_random_field(alpha = 3.0,
         gfield = gfield / (numpy.max(gfield) - numpy.min(gfield))
         
     return gfield
-
-
-
-
-def main():
-    import matplotlib
-    import matplotlib.pyplot as plt
-    example = gaussian_random_field()
-    plt.imshow(example, cmap='gray')
-    plt.show()
-    
-if __name__ == '__main__':
-    main()
