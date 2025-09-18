@@ -17,6 +17,7 @@ import utils.gaussian_random_fields as grf
 class IFM():
     def __init__(self,
                 out_dir:str,
+                coeff_data_table:str,
                 wtypes:list[str],
                 vdepths:list[float|int],
                 fscatter:bool,
@@ -32,6 +33,7 @@ class IFM():
 
         Args:
             out_dir (str): Directory path for output files.
+            coeff_data_table (str): Path to the water coefficients data table CSV file.
             wtypes (list[str]): List of water types.
             vdepths (list[float | int]): List of vertical depths.
             fscatter (bool): Flag to enable or disable forward scattering.
@@ -48,8 +50,9 @@ class IFM():
         """
         self.out_dir = out_dir
         os.makedirs(self.out_dir, exist_ok=True)
-
+        self.coeff_data_table = coeff_data_table
         self.wtypes = wtypes
+
         self.vdepths = vdepths
         self.fscatter = fscatter
         self.g = g
@@ -262,7 +265,7 @@ class IFM():
         If forward scattering is not considered, phi, G and G_direct get default values and are not used.
         """
 
-        a, b, beta, K = get_coeffs(wtype, full=self.full)
+        a, b, beta, K = get_coeffs(wtype, self.coeff_data_table, full=self.full)
         phi = 0.3 * np.mean(b)
         # phi = simple_eval(phi_exp, functions={'mean':np.mean}, names={'a':a, 'b':b, 'beta':beta, 'K':K, 'g':g, 'mu':mu}) if isinstance(phi_exp, str) else phi_exp
         G = a + self.g * b # Effective coefficient

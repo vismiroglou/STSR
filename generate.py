@@ -19,6 +19,7 @@ if __name__ == '__main__':
     else:
         print('Using the underwater IFM implementation')
         ifm = IFM(out_dir=config['output_dir'],
+                  coeff_data_table=config['coeff_data_table'],
                   wtypes=config['wtype'],
                   vdepths=config['vdepths'],
                   fscatter=config['fscatter'],

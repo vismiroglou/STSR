@@ -4,12 +4,13 @@ import cv2
 import yaml
 import os
 
-def get_coeffs(wtype: str, full=False) -> tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray]:
+def get_coeffs(wtype: str, table_path:str, full=False) -> tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray]:
     """
     Retrieve absorption, scattering, attenuation, and diffuse attenuation coefficients for a given water type.
 
     Args:
         wtype (str): Water type identifier (e.g., 'I', 'IA', 'IB', 'II', 'III', '1C', '3C', '5C', '7C', '9C').
+        table_path (str): Path to the CSV file containing water coefficients.   
         full (bool, optional): If True, returns coefficients for wavelengths 400–700nm (step 50nm).
                               If False, returns coefficients for 600nm, 550nm, and 450nm. Defaults to False.
 
@@ -35,8 +36,8 @@ def get_coeffs(wtype: str, full=False) -> tuple[np.ndarray, np.ndarray, np.ndarr
                '5C':7,
                '7C':8,
                '9C':9}
-    csv = pd.read_csv('data_tables/jerlov.csv')
-    coeffs = csv.iloc[mapping[wtype]]
+    csv = pd.read_csv(table_path, dtype={"wtype": str})
+    coeffs = csv.loc[csv['wtype'] == wtype].squeeze()
 
     if full:
         nm_range = range(400, 701, 50)
@@ -161,7 +162,8 @@ def load_config(args: object) -> dict:
     final_config = {
         'input_img': input_img,
         'output_dir': output_dir,
-        'wtype': get('wtype', ['I', 'IA', 'IB', 'II', 'III', '1C', '3C', '5C', '7C', '9C']),
+        'coeff_data_table': get('coeff_data_table', 'data_tables/randomized_water_types.csv'),
+        'wtype': get('wtype', ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15']),
         'vdepths': get('vdepths', [1]),
         'z_min': get('z_min', 0.1),
         'z_max': get('z_max', 5.0),
