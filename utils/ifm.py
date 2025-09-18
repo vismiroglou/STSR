@@ -183,8 +183,13 @@ class IFM():
 
         # Calculate blur
         if phi is not None:
+<<<<<<< HEAD
             # forward_scatter = depth_based_blur(forward_scatter, phi)
             forward_scatter = depth_blur_in_bins(forward_scatter, num_bins=30)
+=======
+            forward_scatter = depth_based_blur(forward_scatter, phi)
+            # forward_scatter = depth_blur_in_bins(forward_scatter, num_bins=30)
+>>>>>>> 7e3d79efe12c036f462dd205ee987f095afdf2a4
 
         return forward_scatter
 
