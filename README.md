@@ -1,0 +1,1 @@
+# Sea-ing Through Scattered Rays: Revisiting the Image Formation Model for Realistic Underwater Image Generation
