@@ -135,14 +135,56 @@ class IFM():
                     output[:, :, c][mask] = blurred_layers[i][:, :, c][mask]
 
             return output
+        
+        def depth_based_blur(weighted_image, phi, kernel='lorentzian'):
+            def gaussian_kernel(size, sigma):
+                ax = np.linspace(-(size // 2), size // 2, size)
+                xx, yy = np.meshgrid(ax, ax)
+                kernel = np.exp(-(xx**2 + yy**2) / (2 * sigma**2))
+                kernel /= np.sum(kernel)
+                return kernel
+
+            def lorentzian_kernel(size, sigma):
+                ax = np.linspace(-(size // 2), size // 2, size)
+                xx, yy = np.meshgrid(ax, ax)
+                rr_sq = xx**2 + yy**2
+                kernel = sigma / (2 * np.pi * (sigma**2 + rr_sq)**(1.5))
+                kernel /= np.sum(kernel)
+                return kernel
+            
+            def pixelwise_blur(img, depth, phi=1.0, kernel_size=15, kernel='gaussian'):
+                if kernel == 'gaussian':
+                    kernel_func = gaussian_kernel
+                elif kernel == 'lorentzian':
+                    kernel_func = lorentzian_kernel
+                else:
+                    raise ValueError("Unsupported kernel type. Use 'gaussian' or 'lorentzian'.")
+                
+                h, w = img.shape[:2]
+                pad = kernel_size // 2
+                image_padded = cv2.copyMakeBorder(img, pad, pad, pad, pad, cv2.BORDER_REFLECT)
+                output = np.zeros_like(img, dtype=np.float32)
+
+                for y in range(h):
+                    for x in range(w):
+                        sigma = phi * depth[y, x]
+                        kernel = kernel_func(kernel_size, sigma)
+                        patch = image_padded[y:y+kernel_size, x:x+kernel_size]
+                        output[y, x] = np.sum(patch * kernel[..., None], axis=(0,1)) if img.ndim == 3 else np.sum(patch * kernel)
+
+                return output
+
+            kernel_size = 15
+            blurred_img = pixelwise_blur(weighted_image, z, phi, kernel_size=int(kernel_size), kernel=kernel)
+            return blurred_img
 
         # Perform scaling    
         forward_scatter = img * (np.exp(-z[:, :, np.newaxis] * G) - np.exp(-z[:, :, np.newaxis] * beta)) * np.exp(-K * d)
 
         # Calculate blur
         if phi is not None:
-            # forward_scatter = depth_based_blur(forward_scatter, depth, K)
-            forward_scatter = depth_blur_in_bins(forward_scatter, num_bins=30)
+            forward_scatter = depth_based_blur(forward_scatter, phi)
+            # forward_scatter = depth_blur_in_bins(forward_scatter, num_bins=30)
 
         return forward_scatter
 
