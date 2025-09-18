@@ -18,17 +18,9 @@ python generate.py --config /path/to/config/file.cfg
 The default configuration file 'configs/example.cfg' contains all configurable parameters and can be used as a template.
 
 ## Example outputs:
-<img src="display_images/gmn_8064up/1C.png" alt="1C" style="width:150px;"/>
-<img src="display_images/gmn_8064up/3C.png" alt="3C" style="width:150px;"/>
-<img src="display_images/gmn_8064up/5C.png" alt="5C" style="width:150px;"/>
-<img src="display_images/gmn_8064up/7C.png" alt="7C" style="width:150px;"/>
-<img src="display_images/gmn_8064up/9C.png" alt="9C" style="width:150px;"/>
+<img src="display_images/gmn_8064up/1C.png" alt="1C" style="width:150px;"/><img src="display_images/gmn_8064up/3C.png" alt="3C" style="width:150px;"/><img src="display_images/gmn_8064up/5C.png" alt="5C" style="width:150px;"/><img src="display_images/gmn_8064up/7C.png" alt="7C" style="width:150px;"/><img src="display_images/gmn_8064up/9C.png" alt="9C" style="width:150px;"/>
 
-<img src="display_images/gmn_7543up/1C.png" alt="1C" style="width:150px;"/>
-<img src="display_images/gmn_7543up/3C.png" alt="3C" style="width:150px;"/>
-<img src="display_images/gmn_7543up/5C.png" alt="5C" style="width:150px;"/>
-<img src="display_images/gmn_7543up/7C.png" alt="7C" style="width:150px;"/>
-<img src="display_images/gmn_7543up/9C.png" alt="9C" style="width:150px;"/>
+<img src="display_images/gmn_7543up/1C.png" alt="1C" style="width:150px;"/><img src="display_images/gmn_7543up/3C.png" alt="3C" style="width:150px;"/><img src="display_images/gmn_7543up/5C.png" alt="5C" style="width:150px;"/><img src="display_images/gmn_7543up/7C.png" alt="7C" style="width:150px;"/><img src="display_images/gmn_7543up/9C.png" alt="9C" style="width:150px;"/>
 
 ## Disclaimers and copyright notes
 - All credit for data_tables/camspec_database.csv goes to https://www.gujinwei.org/research/camspec/db.html
