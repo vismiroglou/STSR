@@ -7,8 +7,8 @@ In recent years, the underwater image formation model has found extensive use in
 
 Accepted in the [CVAUI & AAMVEMV](https://vap.aau.dk/marinevision/) workshop in [ICCV 2025](https://iccv.thecvf.com/) 
 - Project page: https://vap.aau.dk/sea-ing-through-scattered-rays/
-- Dataset:
-- arXiv:
+- Dataset: https://huggingface.co/datasets/vismiroglou/THEBUCKETv1
+- arXiv: https://arxiv.org/abs/2509.15011
 
 ## Code usage:
 ```
@@ -31,4 +31,13 @@ The default configuration file 'configs/example.cfg' contains all configurable p
 
 ## Citation:
 ```
+@misc{ismiroglou2025seaingscatteredraysrevisiting,
+      title={Sea-ing Through Scattered Rays: Revisiting the Image Formation Model for Realistic Underwater Image Generation}, 
+      author={Vasiliki Ismiroglou and Malte Pedersen and Stefan H. Bengtson and Andreas Aakerberg and Thomas B. Moeslund},
+      year={2025},
+      eprint={2509.15011},
+      archivePrefix={arXiv},
+      primaryClass={cs.CV},
+      url={https://arxiv.org/abs/2509.15011}, 
+}
 ```
